@@ -14,6 +14,7 @@
     </Window.DataContext>
     <StackPanel>
         <GroupBox Header="1)通常の MultiBinding">
+            <!--言語対応が困難になるため、文字列リテラルの直接記述は基本的には避ける。-->
             <TextBlock>
                 <TextBlock.Text>
                     <MultiBinding StringFormat="「{0}」の作者は{1}です">
@@ -39,8 +40,9 @@
                         {Binding Title}, {Binding Author}}" />
         </GroupBox>
         <GroupBox Header="4)マークアップ拡張を利用(フォーマット自体を Binding)">
-            <!--この方法は Format がカルチャーの影響を受けて変化する場合に追従しないので、-->
-            <!--利用シーンは厳選したほうがよい。-->
+            <!--この方法は Format がカルチャーの影響を受けて変化する場合に追従しない。-->
+            <!--ItemsSource で項目ごとに小数点以下の桁が変化するなど、-->
+            <!--言語に依らないフォーマットを CLR プロパティで行う場合には推奨される実装パターン。-->
             <TextBlock Text="{me:StringFormat {Binding Format}, {Binding Title}, {Binding Author}}" />
         </GroupBox>
         <GroupBox Header="5)null を与えたときに例外が発生しないことの確認">

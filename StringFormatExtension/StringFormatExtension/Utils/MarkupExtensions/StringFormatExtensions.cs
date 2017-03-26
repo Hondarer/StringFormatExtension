@@ -1,5 +1,6 @@
 ﻿using HondarerSoft.Utils.Converters;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Markup;
 
@@ -74,6 +75,11 @@ namespace HondarerSoft.Utils.MarkupExtensions
                 throw new ArgumentException("format must be string or binding", "format");
             }
 
+            if (args == null)
+            {
+                args = new object[] { null };
+            }
+
             this.format = format;
             this.args = args;
         }
@@ -117,8 +123,6 @@ namespace HondarerSoft.Utils.MarkupExtensions
 
             foreach (object arg in args)
             {
-                //BindingBase binding = (arg as BindingBase) ?? new Binding() { Source = arg };
-
                 BindingBase binding = null;
                 if (arg is BindingBase)
                 {
