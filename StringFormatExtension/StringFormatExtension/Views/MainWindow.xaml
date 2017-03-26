@@ -41,8 +41,10 @@
         <GroupBox Header="4)マークアップ拡張を利用(フォーマット自体を Binding)">
             <!--この方法は Format がカルチャーの影響を受けて変化する場合に追従しないので、-->
             <!--利用シーンは厳選したほうがよい。-->
-            <TextBlock Text="{me:StringFormat {Binding Format},
-                        {Binding Title}, {Binding Author}}" />
+            <TextBlock Text="{me:StringFormat {Binding Format}, {Binding Title}, {Binding Author}}" />
+        </GroupBox>
+        <GroupBox Header="5)null を与えたときに例外が発生しないことの確認">
+            <TextBlock Text="{me:StringFormat null{0}です, {x:Null}}" />
         </GroupBox>
     </StackPanel>
 </Window>

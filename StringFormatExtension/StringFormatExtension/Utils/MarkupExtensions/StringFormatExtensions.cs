@@ -29,23 +29,6 @@ namespace HondarerSoft.Utils.MarkupExtensions
         private static IMultiValueConverter converter = new FormatStringConverter();
 
         /// <summary>
-        /// 複数の項目をフォーマットする <see cref="StringFormatExtension"/> クラスの新しいインスタンスを初期化します。
-        /// </summary>
-        /// <param name="format">フォーマット文字列。</param>
-        /// <param name="args">フォーマット対象オブジェクトの配列。</param>
-        /// <exception cref="ArgumentException"><see cref="format"/> が <see cref="string"/> でも <see cref="BindingBase"/> でもありません。</exception>
-        public StringFormatExtension(object format, object[] args)
-        {
-            if ((format is string) == false && (format is BindingBase) == false)
-            {
-                throw new ArgumentException("format must be string or binding", "format");
-            }
-
-            this.format = format;
-            this.args = args;
-        }
-
-        /// <summary>
         /// 1 つの項目をフォーマットする <see cref="StringFormatExtension"/> クラスの新しいインスタンスを初期化します。
         /// </summary>
         /// <param name="format">フォーマット文字列。</param>
@@ -79,6 +62,23 @@ namespace HondarerSoft.Utils.MarkupExtensions
         }
 
         /// <summary>
+        /// 複数の項目をフォーマットする <see cref="StringFormatExtension"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="format">フォーマット文字列。</param>
+        /// <param name="args">フォーマット対象オブジェクトの配列。</param>
+        /// <exception cref="ArgumentException"><see cref="format"/> が <see cref="string"/> でも <see cref="BindingBase"/> でもありません。</exception>
+        public StringFormatExtension(object format, object[] args)
+        {
+            if ((format is string) == false && (format is BindingBase) == false)
+            {
+                throw new ArgumentException("format must be string or binding", "format");
+            }
+
+            this.format = format;
+            this.args = args;
+        }
+
+        /// <summary>
         /// このマークアップ拡張機能で使用するターゲット プロパティの値として提供されるオブジェクトを返します。
         /// </summary>
         /// <param name="serviceProvider">マークアップ拡張機能のサービスを提供できるサービス プロバイダー ヘルパー。</param>
@@ -98,8 +98,21 @@ namespace HondarerSoft.Utils.MarkupExtensions
             }
             else
             {
+#if false
                 // リテラルの場合は、StringFormat にそのまま設定
                 mb.StringFormat = format.ToString();
+#else
+                // StringFormat の機構を利用すると、
+                // 例外が起きた時などの扱いがこのマークアップ拡張の動きと統一されないので
+                // フォーマットリテラルでも、StringFormatConverter を使う
+                BindingBase binding = null;
+                binding = new Binding()
+                {
+                    Source = format
+                };
+                mb.Bindings.Add(binding);
+                mb.Converter = converter;
+#endif
             }
 
             foreach (object arg in args)
