@@ -1,0 +1,48 @@
+﻿<Window x:Class="StringFormatExtension.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:StringFormatExtension.ViewModels"
+        xmlns:me="clr-namespace:HondarerSoft.Utils.MarkupExtensions"
+        xmlns:resrc="clr-namespace:StringFormatExtension.Resources"
+        xmlns:local="clr-namespace:StringFormatExtension.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Width="525" SizeToContent="Height">
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
+    <StackPanel>
+        <GroupBox Header="1)通常の MultiBinding">
+            <TextBlock>
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="「{0}」の作者は{1}です">
+                        <Binding Path="Title" />
+                        <Binding Path="Author" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </GroupBox>
+        <GroupBox Header="2)リソースを用いた MultiBinding">
+            <TextBlock>
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{x:Static resrc:AssemblyResource.Author_of_0_is_1}">
+                        <Binding Path="Title" />
+                        <Binding Path="Author" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </GroupBox>
+        <GroupBox Header="3)マークアップ拡張を利用">
+            <!--推奨される実装パターン-->
+            <TextBlock Text="{me:StringFormat {x:Static resrc:AssemblyResource.Author_of_0_is_1},
+                        {Binding Title}, {Binding Author}}" />
+        </GroupBox>
+        <GroupBox Header="4)マークアップ拡張を利用(フォーマット自体を Binding)">
+            <!--この方法は Format がカルチャーの影響を受けて変化する場合に追従しないので、-->
+            <!--利用シーンは厳選したほうがよい。-->
+            <TextBlock Text="{me:StringFormat {Binding Format},
+                        {Binding Title}, {Binding Author}}" />
+        </GroupBox>
+    </StackPanel>
+</Window>
