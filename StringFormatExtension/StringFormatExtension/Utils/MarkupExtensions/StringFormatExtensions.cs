@@ -109,7 +109,7 @@ namespace HondarerSoft.Utils.MarkupExtensions
 #else
                 // StringFormat の機構を利用すると、
                 // 例外が起きた時などの扱いがこのマークアップ拡張の動きと統一されないので
-                // フォーマットリテラルでも、StringFormatConverter を使う
+                // フォーマットがリテラルでも、StringFormatConverter を使う
                 BindingBase binding = null;
                 binding = new Binding()
                 {
