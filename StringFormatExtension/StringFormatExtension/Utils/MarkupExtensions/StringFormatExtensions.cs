@@ -1,6 +1,5 @@
 ﻿using HondarerSoft.Utils.Converters;
 using System;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Markup;
 
