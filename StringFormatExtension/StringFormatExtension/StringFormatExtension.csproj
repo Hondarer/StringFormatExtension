@@ -56,7 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Utils\Converters\FormatStringConverter.cs" />
+    <Compile Include="Utils\Converters\StringFormatConverter.cs" />
     <Compile Include="Utils\MarkupExtensions\StringFormatExtensions.cs" />
     <Compile Include="Resources\AssemblyResource.Designer.cs">
       <AutoGen>True</AutoGen>

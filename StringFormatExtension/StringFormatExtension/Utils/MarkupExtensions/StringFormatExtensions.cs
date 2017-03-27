@@ -26,7 +26,7 @@ namespace HondarerSoft.Utils.MarkupExtensions
         /// <summary>
         /// 文字列のフォーマットを行うコンバーターを保持します。
         /// </summary>
-        private static IMultiValueConverter converter = new FormatStringConverter();
+        private static IMultiValueConverter converter = new StringFormatConverter();
 
         /// <summary>
         /// 1 つの項目をフォーマットする <see cref="StringFormatExtension"/> クラスの新しいインスタンスを初期化します。

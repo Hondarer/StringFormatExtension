@@ -8,7 +8,7 @@ namespace HondarerSoft.Utils.Converters
     /// <summary>
     /// 文字列のフォーマットを行うコンバーターを提供します。
     /// </summary>
-    public class FormatStringConverter : IMultiValueConverter
+    public class StringFormatConverter : IMultiValueConverter
     {
         /// <summary>
         /// フォーマット文字列を表す引数のインデックスを表します。
